@@ -1,6 +1,6 @@
 exports.seed = function(knex, Promise) {
   // Inserts seed entries
-  return knex("table_name").insert([
+  return knex("requests").insert([
     {
       id: 1,
       request_date: "2019-04-24",

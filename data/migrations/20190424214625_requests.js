@@ -27,7 +27,14 @@ exports.up = function(knex, Promise) {
       .inTable("volunteers")
       .onUpdate("CASCADE")
       .onDelete("CASCADE");
-    tbl.timestamps();
+    tbl
+      .timestamp("created_at")
+      .notNullable()
+      .defaultTo(knex.fn.now());
+    tbl
+      .timestamp("updated_at")
+      .notNullable()
+      .defaultTo(knex.fn.now());
   });
 };
 

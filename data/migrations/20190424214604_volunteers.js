@@ -19,7 +19,14 @@ exports.up = function(knex, Promise) {
     tbl.string("zip", 20).notNullable();
     tbl.string("dashboard", 100).notNullable();
     tbl.boolean("available");
-    tbl.timestamps();
+    tbl
+      .timestamp("created_at")
+      .notNullable()
+      .defaultTo(knex.fn.now());
+    tbl
+      .timestamp("updated_at")
+      .notNullable()
+      .defaultTo(knex.fn.now());
   });
 };
 
