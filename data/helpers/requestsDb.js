@@ -17,7 +17,7 @@ module.exports = {
     return replateDb("requests")
       .insert(request) //* returns id within array
       .then(([id]) => {
-        return this.getVolunteerById(id);
+        return this.getRequestById(id);
       });
   },
 
@@ -26,7 +26,7 @@ module.exports = {
       .update(request)
       .where("id", id) //* returns count of updated
       .then(c => {
-        return this.getrequestById(id);
+        return this.getRequestById(id);
       });
   },
 
