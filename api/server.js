@@ -6,4 +6,8 @@ const server = express();
 const middlewareConfig = require("./middleware.js");
 middlewareConfig(server);
 
+//* Configure server to use routers
+const businessesRouter = require("../resources/businesses/businessesRouter");
+server.use("/api/business", businessesRouter);
+
 module.exports = server;
