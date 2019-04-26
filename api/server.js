@@ -9,5 +9,7 @@ middlewareConfig(server);
 //* Configure server to use routers
 const businessesRouter = require("../resources/businesses/businessesRouter");
 server.use("/api/business", businessesRouter);
+const volunteersRouter = require("../resources/volunteers/volunteersRouter");
+server.use("/api/volunteer", volunteersRouter);
 
 module.exports = server;
