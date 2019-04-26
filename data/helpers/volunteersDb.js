@@ -4,12 +4,12 @@ const replateDb = require("../dbConfig");
 //* export volunteers table helper functions
 module.exports = {
   getVolunteers: function() {
-    return replateDb("volunteers"); //* return array of business objects
+    return replateDb("volunteers"); //* return array of volunteer objects
   },
 
   getVolunteerById: function(id) {
     return replateDb("volunteers")
-      .where("id", id) //* returns business within array
+      .where("id", id) //* returns volunteer within array
       .first();
   },
 
