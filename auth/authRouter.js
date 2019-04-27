@@ -18,9 +18,9 @@ router.post("/bus/register", async (req, res) => {
     credentials.password = hash;
 
     //* add new business to db businesses table
-    const newBusiness = await businessesDb.addBusiness(credentials);
-    if (newBusiness) {
-      res.status(201).json(newBusiness);
+    const newVolunteer = await businessesDb.addBusiness(credentials);
+    if (newVolunteer) {
+      res.status(201).json(newVolunteer);
     } else {
       res.status(500).json({ error: "Unable to register new business" });
     }
@@ -30,6 +30,23 @@ router.post("/bus/register", async (req, res) => {
 });
 
 //* create volunteer register endpoint
-router.post("/register/bus", (req, res) => {});
+router.post("/vol/register", async (req, res) => {
+  try {
+    const credentials = req.body;
+    //* override password w/hash
+    const hash = bcrypt.hashSync(credentials.password, 8);
+    credentials.password = hash;
+
+    //* add new business to db businesses table
+    const newVolunteer = await volunteersDb.addVolunteer(credentials);
+    if (newVolunteer) {
+      res.status(201).json(newVolunteer);
+    } else {
+      res.status(500).json({ error: "Unable to register new volunteer" });
+    }
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
 
 module.exports = router;

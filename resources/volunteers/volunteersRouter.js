@@ -33,20 +33,6 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
-  try {
-    const volunteer = req.body;
-    const newVolunteer = await volunteersDb.addVolunteer(volunteer);
-    if (newVolunteer) {
-      res.status(201).json(newVolunteer);
-    } else {
-      res.status(500).json({ error: "Unable to add new volunteer" });
-    }
-  } catch (error) {
-    res.status(500).json(error);
-  }
-});
-
 router.put("/:id", async (req, res) => {
   try {
     const { id } = req.params;
