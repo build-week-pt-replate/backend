@@ -9,6 +9,8 @@ const volunteersDb = require("../data/helpers/volunteersDb");
 const express = require("express");
 const router = express.Router();
 
+//**ADD REGISTER ROUTE HANDLERS */
+
 //* create business register endpoint
 router.post("/bus/register", async (req, res) => {
   try {
@@ -46,6 +48,31 @@ router.post("/vol/register", async (req, res) => {
     }
   } catch (error) {
     res.status(500).json(error);
+  }
+});
+
+//**ADD LOGIN ROUTE HANDLERS */
+
+//* create business login endpoint
+router.post("/bus/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    //* grab the business from db if exists
+    const business = await businessesDb.getBusinessById(email);
+    if (business && bcrypt.compareSync(password, business.password)) {
+      res.status(200).json({
+        ...business,
+        message: `Welcome ${business.companyname}`
+      });
+    } else {
+      res
+        .status(404)
+        .json({ error: "Invalid credentials. Check email or password" });
+    }
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "Invalid credentials. Check email or password" });
   }
 });
 
