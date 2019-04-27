@@ -33,20 +33,6 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
-  try {
-    const business = req.body;
-    const newBusiness = await businessesDb.addBusiness(business);
-    if (newBusiness) {
-      res.status(201).json(newBusiness);
-    } else {
-      res.status(500).json({ error: "Unable to add new business" });
-    }
-  } catch (error) {
-    res.status(500).json(error);
-  }
-});
-
 router.put("/:id", async (req, res) => {
   try {
     const { id } = req.params;
