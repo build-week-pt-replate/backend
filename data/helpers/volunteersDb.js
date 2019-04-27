@@ -10,6 +10,7 @@ module.exports = {
   getVolunteerById: function(id) {
     return replateDb("volunteers")
       .where("id", id) //* returns volunteer within array
+      .orWhere("username", id)
       .first();
   },
 
