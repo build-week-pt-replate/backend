@@ -16,3 +16,7 @@ function generateToken(resource) {
 
   return jwt.sign(payload, secrets.jwtSecret, options);
 }
+
+module.exports = {
+  generateToken
+};

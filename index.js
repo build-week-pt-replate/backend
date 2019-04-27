@@ -1,3 +1,6 @@
+//* Give access to .env file
+require("dotenv").config();
+
 //* Import express server
 const server = require("./api/server");
 
