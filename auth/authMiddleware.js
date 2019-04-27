@@ -22,3 +22,7 @@ function verify(req, res, next) {
     res.status(401).json({ error: `Error in validating credentials` });
   }
 }
+
+module.exports = {
+  verify
+};
