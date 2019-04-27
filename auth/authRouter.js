@@ -76,4 +76,27 @@ router.post("/bus/login", async (req, res) => {
   }
 });
 
+//* create volunteer login endpoint
+router.post("/vol/login", async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    //* grab the volunteer from db if exists
+    const volunteer = await volunteersDb.getVolunteerById(username);
+    if (volunteer && bcrypt.compareSync(password, volunteer.password)) {
+      res.status(200).json({
+        ...volunteer,
+        message: `Welcome ${volunteer.firstname} ${volunteer.lastname}`
+      });
+    } else {
+      res
+        .status(404)
+        .json({ error: "Invalid credentials. Check username or password" });
+    }
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "Invalid credentials. Check username or password" });
+  }
+});
+
 module.exports = router;
