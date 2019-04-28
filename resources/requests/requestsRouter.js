@@ -1,12 +1,15 @@
 //* import requests helper functions
 const requestsDb = require("../../data/helpers/requestsDb");
 
+//* import authorization middleware to filter access to resource
+const authorization = require("../../auth/authMiddleware");
+
 //* create Router
 const express = require("express");
 const router = express.Router();
 
 //* Create Endpoints
-router.get("/", async (req, res) => {
+router.get("/", authorization.verify, async (req, res) => {
   try {
     const requests = await requestsDb.getRequests();
     if (requests) {
@@ -19,7 +22,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", authorization.verify, async (req, res) => {
   try {
     const { id } = req.params;
     const request = await requestsDb.getRequestById(id);
@@ -33,7 +36,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", authorization.verify, async (req, res) => {
   try {
     const request = req.body;
     const newRequest = await requestsDb.addRequest(request);
@@ -47,7 +50,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", authorization.verify, async (req, res) => {
   try {
     const { id } = req.params;
     const toEdit = req.body;
@@ -64,7 +67,7 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", authorization.verify, async (req, res) => {
   try {
     const { id } = req.params;
     const deletedCount = await requestsDb.deleteRequest(id);

@@ -1,6 +1,9 @@
 //* import bcryptjs
 const bcrypt = require("bcryptjs");
 
+//* import token generator function
+const tokenService = require("./tokenService");
+
 //* import businesses and volunteers helper functions
 const businessesDb = require("../data/helpers/businessesDb");
 const volunteersDb = require("../data/helpers/volunteersDb");
@@ -9,7 +12,7 @@ const volunteersDb = require("../data/helpers/volunteersDb");
 const express = require("express");
 const router = express.Router();
 
-//**ADD REGISTER ROUTE HANDLERS */
+//****ADD REGISTER ROUTE HANDLERS ********/
 
 //* create business register endpoint
 router.post("/bus/register", async (req, res) => {
@@ -20,9 +23,14 @@ router.post("/bus/register", async (req, res) => {
     credentials.password = hash;
 
     //* add new business to db businesses table
-    const newVolunteer = await businessesDb.addBusiness(credentials);
-    if (newVolunteer) {
-      res.status(201).json(newVolunteer);
+    const newBusiness = await businessesDb.addBusiness(credentials);
+    if (newBusiness) {
+      //* generate token
+      const token = tokenService.generateToken(newBusiness);
+      res.status(201).json({
+        ...newBusiness,
+        token: token
+      });
     } else {
       res.status(500).json({ error: "Unable to register new business" });
     }
@@ -42,7 +50,11 @@ router.post("/vol/register", async (req, res) => {
     //* add new business to db businesses table
     const newVolunteer = await volunteersDb.addVolunteer(credentials);
     if (newVolunteer) {
-      res.status(201).json(newVolunteer);
+      const token = tokenService.generateToken(newVolunteer);
+      res.status(201).json({
+        ...newVolunteer,
+        token
+      });
     } else {
       res.status(500).json({ error: "Unable to register new volunteer" });
     }
@@ -51,7 +63,7 @@ router.post("/vol/register", async (req, res) => {
   }
 });
 
-//**ADD LOGIN ROUTE HANDLERS */
+//*****ADD LOGIN ROUTE HANDLERS ***********/
 
 //* create business login endpoint
 router.post("/bus/login", async (req, res) => {
@@ -60,8 +72,11 @@ router.post("/bus/login", async (req, res) => {
     //* grab the business from db if exists
     const business = await businessesDb.getBusinessById(email);
     if (business && bcrypt.compareSync(password, business.password)) {
+      //* generate token
+      const token = tokenService.generateToken(business);
       res.status(200).json({
         ...business,
+        token,
         message: `Welcome ${business.companyname}`
       });
     } else {
@@ -83,8 +98,10 @@ router.post("/vol/login", async (req, res) => {
     //* grab the volunteer from db if exists
     const volunteer = await volunteersDb.getVolunteerById(username);
     if (volunteer && bcrypt.compareSync(password, volunteer.password)) {
+      const token = tokenService.generateToken(volunteer);
       res.status(200).json({
         ...volunteer,
+        token,
         message: `Welcome ${volunteer.firstname} ${volunteer.lastname}`
       });
     } else {

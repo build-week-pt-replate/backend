@@ -1,12 +1,15 @@
 //* import businesses helper functions
 const businessesDb = require("../../data/helpers/businessesDb");
 
+//* import authorization middleware to filter access to resource
+const authorization = require("../../auth/authMiddleware");
+
 //* create Router
 const express = require("express");
 const router = express.Router();
 
 //* Create Endpoints
-router.get("/", async (req, res) => {
+router.get("/", authorization.verify, async (req, res) => {
   try {
     const businesses = await businessesDb.getBusinesses();
     if (businesses) {
@@ -19,7 +22,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", authorization.verify, async (req, res) => {
   try {
     const { id } = req.params;
     const business = await businessesDb.getBusinessById(id);
@@ -33,7 +36,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", authorization.verify, async (req, res) => {
   try {
     const { id } = req.params;
     const toEdit = req.body;
@@ -51,7 +54,7 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", authorization.verify, async (req, res) => {
   try {
     const { id } = req.params;
     const deletedCount = await businessesDb.deleteBusiness(id);
