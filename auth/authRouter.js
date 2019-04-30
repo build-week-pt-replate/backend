@@ -50,10 +50,11 @@ router.post("/vol/register", async (req, res) => {
     //* add new business to db businesses table
     const newVolunteer = await volunteersDb.addVolunteer(credentials);
     if (newVolunteer) {
+      //* generate token
       const token = tokenService.generateToken(newVolunteer);
       res.status(201).json({
         ...newVolunteer,
-        token
+        token: token
       });
     } else {
       res.status(500).json({ error: "Unable to register new volunteer" });
