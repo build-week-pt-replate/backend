@@ -14,17 +14,14 @@ exports.seed = function(knex, Promise) {
     },
     {
       id: 2,
-      username: "jrambo",
+      email: "jrambo@example.com",
       password: "efgh",
       phone: "4234445555",
-      email: "jrambo@example.com",
       firstName: "john",
       lastName: "rambo",
       city: "oak ridge",
       state: "tn",
-      zip: "37748",
-      dashboard: "???",
-      available: true
+      zip: "37748"
     }
   ]);
 };

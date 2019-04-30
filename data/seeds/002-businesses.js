@@ -19,7 +19,7 @@ exports.seed = function(knex, Promise) {
       password: "efgh",
       phone: "4235553333",
       email: "jbegley@example.com",
-      companyname: "blues brothers",
+      companyName: "blues brothers",
       officeName: "",
       officeEmail: "",
       street: "321 fairway ave",
