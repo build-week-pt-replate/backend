@@ -1,8 +1,8 @@
 exports.up = function(knex, Promise) {
   return knex.schema.createTable("volunteers", tbl => {
     tbl.increments();
-    tbl.string("firstname", 60).notNullable();
-    tbl.string("lastname", 100).notNullable();
+    tbl.string("firstName", 60).notNullable();
+    tbl.string("lastName", 100).notNullable();
     tbl
       .string("email", 60)
       .notNullable()
