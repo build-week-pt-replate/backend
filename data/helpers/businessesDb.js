@@ -16,6 +16,7 @@ module.exports = {
 
   addBusiness: function(business) {
     return replateDb("businesses")
+      .returning("id")
       .insert(business) //* returns id within array
       .then(([id]) => {
         return this.getBusinessById(id);
