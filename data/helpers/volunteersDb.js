@@ -16,6 +16,7 @@ module.exports = {
 
   addVolunteer: function(volunteer) {
     return replateDb("volunteers")
+      .returning("id")
       .insert(volunteer) //* returns id within array
       .then(([id]) => {
         return this.getVolunteerById(id);
