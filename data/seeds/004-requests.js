@@ -3,31 +3,31 @@ exports.seed = function(knex, Promise) {
   return knex("requests").insert([
     {
       id: 1,
-      request_date: "2019-04-24",
-      request_time: "11:00:00",
-      location_name: "Hunger First",
-      location_street: "111 Kenwood Rd",
-      location_city: "Knoxville",
-      location_state: "TN",
-      location_zip: "37902",
-      food_description: "Various canned food items",
+      requestDate: "2019-04-24",
+      requestTime: "11:00:00",
+      locationName: "Hunger First",
+      locationStreet: "111 Kenwood Rd",
+      locationCity: "Knoxville",
+      locationState: "TN",
+      locationZip: "37902",
+      foodDescription: "Various canned food items",
       comment: "Can be picked up anytime before 2pm",
-      business_id: 1,
-      volunteer_id: null
+      businessId: 1,
+      volunteerId: null
     },
     {
       id: 2,
-      request_date: "2019-04-27",
-      request_time: "10:30:00",
-      location_name: "Hope Shelter",
-      location_street: "110 Carolina Street",
-      location_city: "Knoxville",
-      location_state: "TN",
-      location_zip: "37902",
-      food_description: "Boxed and canned items",
+      requestDate: "2019-04-27",
+      requestTime: "10:30:00",
+      locationName: "Hope Shelter",
+      locationStreet: "110 Carolina Street",
+      locationCity: "Knoxville",
+      locationState: "TN",
+      locationZip: "37902",
+      foodDescription: "Boxed and canned items",
       comment: "",
-      business_id: 2,
-      volunteer_id: 1
+      businessId: 2,
+      volunteerId: 1
     }
   ]);
 };

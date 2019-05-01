@@ -6,7 +6,6 @@ const secrets = require("./authConfig");
 function generateToken(resource) {
   const payload = {
     subject: resource.id,
-    username: resource.username,
     email: resource.email
   };
 
@@ -14,7 +13,8 @@ function generateToken(resource) {
     expiresIn: "1d"
   };
 
-  return jwt.sign(payload, secrets.jwtSecret, options);
+  const token = jwt.sign(payload, secrets.jwtSecret, options);
+  return token;
 }
 
 module.exports = {
