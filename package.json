@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "server": "nodemon index.js"
+    "server": "nodemon index.js",
+    "start": "node index.js"
   },
   "repository": "https://github.com/build-week-pt-replate/backend.git",
   "author": "cferrell2 <cferrell12182@gmail.com>",
