@@ -78,7 +78,7 @@ router.post("/bus/login", async (req, res) => {
       res.status(200).json({
         ...business,
         token,
-        message: `Welcome ${business.companyname}`
+        message: `Welcome ${business.companyName}`
       });
     } else {
       res
@@ -95,15 +95,15 @@ router.post("/bus/login", async (req, res) => {
 //* create volunteer login endpoint
 router.post("/vol/login", async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { email, password } = req.body;
     //* grab the volunteer from db if exists
-    const volunteer = await volunteersDb.getVolunteerById(username);
+    const volunteer = await volunteersDb.getVolunteerById(email);
     if (volunteer && bcrypt.compareSync(password, volunteer.password)) {
       const token = tokenService.generateToken(volunteer);
       res.status(200).json({
         ...volunteer,
         token,
-        message: `Welcome ${volunteer.firstname} ${volunteer.lastname}`
+        message: `Welcome ${volunteer.firstName} ${volunteer.lastName}`
       });
     } else {
       res
