@@ -14,7 +14,6 @@ module.exports = {
   },
 
   getVolunteerByEmail: function(email) {
-    console.log("**************", email, "********************************")
     return replateDb("volunteers")
       .returning("*")
       .where("email", email) //* returns volunteer within array

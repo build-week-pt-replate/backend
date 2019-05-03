@@ -96,11 +96,9 @@ router.post("/bus/login", async (req, res) => {
 router.post("/vol/login", async (req, res) => {
   try {
     const { email, password } = req.body;
-    console.log("%%%%%%%%%%%%%%%%%%%%%", email)
 
     //* grab the volunteer from db if exists
     const volunteer = await volunteersDb.getVolunteerByEmail(email);
-    console.log("$$$$$$$$$$$$$$$,", volunteer)
     if (volunteer && bcrypt.compareSync(password, volunteer.password)) {
       const token = tokenService.generateToken(volunteer);
       res.status(200).json({
@@ -116,7 +114,7 @@ router.post("/vol/login", async (req, res) => {
   } catch (error) {
     res
       .status(500)
-      .json({ err: error.message, foo: "bar" });
+      .json({ err: error.message });
   }
 });
 
