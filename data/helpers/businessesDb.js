@@ -10,7 +10,13 @@ module.exports = {
   getBusinessById: function(id) {
     return replateDb("businesses")
       .where("id", id) //* returns business within array
-      .orWhere("email", id)
+      .first();
+  },
+
+  getBusinessByEmail: function(email) {
+    return replateDb("businesses")
+      .returning("*")
+      .where("email", email) //* returns business within array
       .first();
   },
 
