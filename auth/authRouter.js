@@ -113,7 +113,7 @@ router.post("/vol/login", async (req, res) => {
   } catch (error) {
     res
       .status(500)
-      .json({ error: "Invalid credentials. Check username or password" });
+      .json({ error: "Invalid credentials. Check username or password", error });
   }
 });
 
