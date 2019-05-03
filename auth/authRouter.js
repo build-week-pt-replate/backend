@@ -97,24 +97,24 @@ router.post("/vol/login", async (req, res) => {
   try {
     const { email, password } = req.body;
     //* grab the volunteer from db if exists
-    res.status(200).json({req: req.body, a: "b"})
-    // const volunteer = await volunteersDb.getVolunteerById(email);
-    // if (volunteer && bcrypt.compareSync(password, volunteer.password)) {
-    //   const token = tokenService.generateToken(volunteer);
-    //   res.status(200).json({
-    //     ...volunteer,
-    //     token,
-    //     message: `Welcome ${volunteer.firstName} ${volunteer.lastName}`
-    //   });
-    // } else {
-    //   res
-    //     .status(404)
-    //     .json({ error: "Invalid credentials. Check username or password" });
-    // }
+    // res.status(200).json({req: req.body, a: "b"})
+    const volunteer = await volunteersDb.getVolunteerById(email);
+    if (volunteer && bcrypt.compareSync(password, volunteer.password)) {
+      const token = tokenService.generateToken(volunteer);
+      res.status(200).json({
+        ...volunteer,
+        token,
+        message: `Welcome ${volunteer.firstName} ${volunteer.lastName}`
+      });
+    } else {
+      res
+        .status(404)
+        .json({ error: "Invalid credentials. Check username or password" });
+    }
   } catch (error) {
     res
       .status(500)
-      .json({ error: error, foo: "bar" });
+      .json({ error: error.message, foo: "bar" });
   }
 });
 
