@@ -95,7 +95,8 @@ router.post("/bus/login", async (req, res) => {
 //* create volunteer login endpoint
 router.post("/vol/login", async (req, res) => {
   try {
-    const { email, password } = await req.body;
+    const { email, password } = req.body;
+    console.log("%%%%%%%%%%%%%%%%%%%%%", email)
 
     //* grab the volunteer from db if exists
     const volunteer = await volunteersDb.getVolunteerByEmail(email);
