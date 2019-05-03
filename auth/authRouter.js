@@ -71,7 +71,7 @@ router.post("/bus/login", async (req, res) => {
   try {
     const { email, password } = req.body;
     //* grab the business from db if exists
-    const business = await businessesDb.getBusinessById(email);
+    const business = await businessesDb.getBusinessByEmail(email);
     if (business && bcrypt.compareSync(password, business.password)) {
       //* generate token
       const token = tokenService.generateToken(business);
@@ -88,7 +88,7 @@ router.post("/bus/login", async (req, res) => {
   } catch (error) {
     res
       .status(500)
-      .json({ error: "Invalid credentials. Check email or password" });
+      .json({ err: error.message });
   }
 });
 
