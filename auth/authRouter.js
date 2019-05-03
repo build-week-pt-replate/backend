@@ -100,6 +100,7 @@ router.post("/vol/login", async (req, res) => {
 
     //* grab the volunteer from db if exists
     const volunteer = await volunteersDb.getVolunteerByEmail(email);
+    console.log("$$$$$$$$$$$$$$$,", volunteer)
     if (volunteer && bcrypt.compareSync(password, volunteer.password)) {
       const token = tokenService.generateToken(volunteer);
       res.status(200).json({
