@@ -13,9 +13,9 @@ module.exports = {
       .first();
   },
 
-
   getVolunteerByEmail: function(email) {
     return replateDb("volunteers")
+      .returning("*")
       .where("email", email) //* returns volunteer within array
       .first();
   },
