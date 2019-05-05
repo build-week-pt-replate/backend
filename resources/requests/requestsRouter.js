@@ -18,7 +18,7 @@ router.get("/", authorization.verify, async (req, res) => {
       res.status(500).json({ error: "Unable to retrieve requests" });
     }
   } catch (error) {
-    res.status(500).json(error);
+    res.status(500).json({ err: error.message });
   }
 });
 
@@ -32,7 +32,7 @@ router.get("/:id", authorization.verify, async (req, res) => {
       res.status(404).json({ error: "Invalid request id" });
     }
   } catch (error) {
-    res.status(500).json(error);
+    res.status(500).json({ err: error.message });
   }
 });
 
@@ -46,7 +46,7 @@ router.post("/", authorization.verify, async (req, res) => {
       res.status(500).json({ error: "Unable to add new request" });
     }
   } catch (error) {
-    res.status(500).json(error);
+    res.status(500).json({ err: error.message });
   }
 });
 
@@ -63,7 +63,7 @@ router.put("/:id", authorization.verify, async (req, res) => {
       });
     }
   } catch (error) {
-    res.status(500).json(error);
+    res.status(500).json({ err: error.message });
   }
 });
 
@@ -79,7 +79,7 @@ router.delete("/:id", authorization.verify, async (req, res) => {
       res.status(404).json({ message: "Invalid request id" });
     }
   } catch (error) {
-    res.status(500).json(error);
+    res.status(500).json({ err: error.message });
   }
 });
 
