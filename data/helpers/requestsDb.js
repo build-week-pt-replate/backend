@@ -17,7 +17,7 @@ module.exports = {
     return replateDb("requests")
       .returning("id")
       .insert(request) //* returns id within array
-      .then(([id]) => {
+      .then(id => {
         return this.getRequestById(id);
       });
   },
