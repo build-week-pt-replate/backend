@@ -74,7 +74,7 @@ router.delete("/:id", authorization.verify, async (req, res) => {
     if (deletedCount) {
       res
         .status(200)
-        .json({ message: `Request id ${id} was successfully deleted.` });
+        .json(id);
     } else {
       res.status(404).json({ message: "Invalid request id" });
     }

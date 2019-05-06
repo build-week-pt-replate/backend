@@ -15,7 +15,7 @@ module.exports = {
 
   addRequest: function(request) {
     return replateDb("requests")
-    .returning("id")
+      .returning("id")
       .insert(request) //* returns id within array
       .then(id => {
         return this.getRequestById(id[0]);
@@ -35,8 +35,5 @@ module.exports = {
     return replateDb("requests")
       .where("id", id)
       .del()  //* returns count of deleted
-      .then(c => {
-        return id
-      });
   }
 };
