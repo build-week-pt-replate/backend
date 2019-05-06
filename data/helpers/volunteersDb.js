@@ -24,8 +24,8 @@ module.exports = {
     return replateDb("volunteers")
       .returning("id")
       .insert(volunteer) //* returns id within array
-      .then(([id]) => {
-        return this.getVolunteerById(id);
+      .then((id) => {
+        return this.getVolunteerById(id[0]);
       });
   },
 
