@@ -34,6 +34,9 @@ module.exports = {
   deleteRequest: function(id) {
     return replateDb("requests")
       .where("id", id)
-      .del(); //* returns count of deleted
+      .del()  //* returns count of deleted
+      .then(c => {
+        return id
+      });
   }
 };
