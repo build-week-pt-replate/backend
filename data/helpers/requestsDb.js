@@ -18,7 +18,6 @@ module.exports = {
     .returning("id")
       .insert(request) //* returns id within array
       .then(id => {
-        console.log('ID??', id, typeof(id))
         return this.getRequestById(id[0]);
       });
   },
