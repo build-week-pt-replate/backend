@@ -24,8 +24,8 @@ module.exports = {
     return replateDb("businesses")
       .returning("id")
       .insert(business) //* returns id within array
-      .then(([id]) => {
-        return this.getBusinessById(id);
+      .then((id) => {
+        return this.getBusinessById(id[0]);
       });
   },
 
