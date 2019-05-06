@@ -7,6 +7,11 @@ module.exports = {
     return replateDb("requests"); //* return array of request objects
   },
 
+  getRequestsByBus: function(bus_id) {
+    return replateDb("requests")
+      .where("businessId", bus_id) //* return array of request objects
+  },
+
   getRequestById: function(id) {
     return replateDb("requests")
       .where("id", id) //* returns request within array

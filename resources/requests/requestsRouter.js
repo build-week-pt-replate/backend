@@ -22,6 +22,20 @@ router.get("/", authorization.verify, async (req, res) => {
   }
 });
 
+router.get("/bus/:id", authorization.verify, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const requests = await requestsDb.getRequestsByBus(id);
+    if (requests) {
+      res.status(200).json(requests);
+    } else {
+      res.status(500).json({ error: "Unable to retrieve requests" });
+    }
+  } catch (error) {
+    res.status(500).json({ err: error.message });
+  }
+});
+
 router.get("/:id", authorization.verify, async (req, res) => {
   try {
     const { id } = req.params;
