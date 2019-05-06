@@ -15,9 +15,10 @@ module.exports = {
 
   addRequest: function(request) {
     return replateDb("requests")
+    .returning("id")
       .insert(request) //* returns id within array
-      .returning("id")
       .then(id => {
+        console.log('ID??', id, typeof(id))
         return this.getRequestById(id);
       });
   },
