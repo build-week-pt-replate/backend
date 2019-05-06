@@ -10,7 +10,7 @@ module.exports = {
   getRequestsByBus: function(id) {
     console.log('ID', id, typeof(id))
     return replateDb("requests")
-      .where("businessId", id) //* return array of request objects
+      .where("businessId", Number(id)) //* return array of request objects
   },
 
   getRequestById: function(id) {
